@@ -1,22 +1,23 @@
-import express from 'express'
-import { isAuthenticated } from '../middlewares/auth.js';
+import express from "express";
+import { isAuthenticated } from "../middlewares/auth.js";
 import {
-    anyDocument,
-    createDocument
-    , deleteDocument, getDocument, updateDocument
-} from '../controllers/documentController.js';
+  anyDocument,
+  createDocument,
+  deleteDocument,
+  getDocument,
+  updateDocument,
+} from "../controllers/documentController.js";
 const router = express.Router();
 
-router.route('/document').post(isAuthenticated, createDocument)
-    .put(isAuthenticated, updateDocument)
-    .get(isAuthenticated, getDocument)
-  
-   
 router
-  .route("/document/:id")
-  .get(isAuthenticated, anyDocument)
-  .delete(isAuthenticated, deleteDocument);
+  .route("/document")
+  .post(isAuthenticated, createDocument)
+  .put(isAuthenticated, updateDocument);
+//   .put(isAuthenticated, getDocument);
+router.route("/documents").put(isAuthenticated, getDocument);
+router.route("/deletedocuments/:id").put(isAuthenticated, deleteDocument);
 
-   
+router.route("/documentt/:id").put(isAuthenticated, anyDocument);
+//   .delete(isAuthenticated, deleteDocument);
 
- export default router;
+export default router;
