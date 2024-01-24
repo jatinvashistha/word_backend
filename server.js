@@ -1,6 +1,6 @@
 import app from "./app.js";
 import { connectedDB } from "./config/database.js";
-  
+
 import { createServer } from "http";
 import { Server } from "socket.io";
 const httpServer = createServer(app);
@@ -8,13 +8,10 @@ connectedDB();
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://word-frontend-git-main-jatinvashistha.vercel.app",
     credentials: true,
   },
 });
-
-
-
 
 const PORT = process.env.PORT || 5000;
 
@@ -37,11 +34,6 @@ io.on("connection", (socket) => {
     console.error("Socket error:", error);
   }
 });
-
- 
- 
- 
- 
 
 httpServer.listen(process.env.PORT, () => {
   console.log(`server is running on port: ${process.env.PORT}`);
